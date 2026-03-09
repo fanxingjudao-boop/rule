@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>2026年 自転車ルール mini app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #1976d2;
+      --accent: #43a047;
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: #333;
+    }
+    .app-shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 1rem 3rem;
+    }
+    header {
+      padding: 0.5rem 0 1rem;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.3rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* タブ */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+    }
+    .tab {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px 999px 0 0;
+      cursor: pointer;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      border-bottom: none;
+      background: transparent;
+      color: #555;
+    }
+    .tab.active {
+      background: #fff;
+      border-color: #ddd;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ページコンテンツ */
+    .page {
+      display: none;
+      background: #fff;
+      border-radius: 0 0 12px 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      min-height: 300px;
+    }
+    .page.active {
+      display: block;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 0;
+    }
+    .pill {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #e3f2fd;
+      color: var(--primary);
+      margin-left: 0.4rem;
+    }
+
+    /* カードレイアウト（青切符） */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.88rem;
+    }
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      background: #f3e5f5;
+      color: #6a1b9a;
+      white-space: nowrap;
+    }
+    .card-body {
+      margin: 0.1rem 0 0.25rem;
+    }
+    .card-meta {
+      font-size: 0.75rem;
+      color: #666;
+    }
+
+    /* 図解エリア共通 */
+    .diagram-wrapper {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-top: 0.8rem;
+      background: #fafafa;
+    }
+    .diagram-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 0.4rem;
+    }
+
+    /* 追い越し図 */
+    .road {
+      position: relative;
+      height: 140px;
+      background: #cfd8dc;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .lane-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      margin-top: -2px;
+      background-image: linear-gradient(90deg, #ffffff 50%, transparent 50%);
+      background-size: 20px 4px;
+      opacity: 0.9;
+    }
+    .car, .bike {
+      position: absolute;
+      width: 90px;
+      height: 44px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #fff;
+    }
+    .car {
+      right: 20px;
+      top: 22px;
+      background: #1976d2;
+    }
+    .bike {
+      left: 20px;
+      top: 70px;
+      background: #43a047;
+    }
+    .distance-arrow {
+      position: absolute;
+      top: 45px;
+      left: 110px; 
+      right: 110px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #333;
+    }
+    .distance-arrow::before,
+    .distance-arrow::after {
+      content: "";
+      flex: 1;
+      border-bottom: 2px solid #555;
+    }
+    .distance-arrow span {
+      padding: 0.1rem 0.4rem;
+      background: #fafafa;
+      white-space: nowrap;
+    }
+
+    /* 追い越しモード切替ボタン */
+    .mode-switch {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+      margin-top: 0.3rem;
+    }
+    .mode-btn {
+      padding: 0.25rem 0.7rem;
+      font-size: 0.8rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    .mode-btn.active {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+    .mode-btn.danger.active {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    /* 小さめ画面最適化 */
+    @media (max-width: 600px) {
+      .app-shell { padding: 0.7rem 0.5rem 2.5rem; }
+      header h1 { font-size: 1.1rem; }
+      .road { height: 130px; }
+      .distance-arrow { left: 96px; right: 96px; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <header>
+    <h1>2026年 自転車ルール mini app<span class="pill">β</span></h1>
+    <p>青切符と、自動車による自転車の追い越しルールをコンパクトに確認できるページです。</p>
+  </header>
+
+  <!-- タブ -->
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-page="home">ホーム</button>
+    <button class="tab" data-page="blue">青切符</button>
+    <button class="tab" data-page="overtake">追い越しルール</button>
+  </nav>
+
+  <!-- ページ: ホーム -->
+  <section class="page active" id="page-home">
+    <h2>概要</h2>
+    <p>
+      2026年4月1日から、自転車の交通違反にも「青切符」が導入され、
+      自動車による追い越し方法も厳格化されます。[web:7][web:10][web:17]
+    </p>
+    <ul>
+      <li>16歳以上の自転車利用者が、一定の違反をすると反則金の対象。[web:7][web:17][web:25]</li>
+      <li>自動車は、自転車の横を通過するときに安全な側方間隔・速度を確保する義務。[web:10][web:28]</li>
+    </ul>
+    <p>上のタブから、詳しい内容と図解を確認できます。</p>
+  </section>
+
+  <!-- ページ: 青切符 -->
+  <section class="page" id="page-blue">
+    <h2>自転車の青切符</h2>
+    <p>
+      自転車にも自動車と同じ「交通反則通告制度（青切符）」が適用され、
+      比較的軽い違反は反則金で処理されます（前科は付かない）。[web:7][web:17]
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">
+          <span>ながらスマホ</span>
+          <span class="card-tag">高リスク</span>
+        </div>
+        <p class="card-body">スマホ操作や画面注視をしながらの走行。</p>
+        <p class="card-meta">例：警察庁・解説サイトでは高額帯の反則金例が紹介されています。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>信号無視</span>
+          <span class="card-tag">交差点</span>
+        </div>
+        <p class="card-body">赤信号での進行など。</p>
+        <p class="card-meta">自動車同様、基本違反として厳しく扱われます。[web:10][web:14]</p>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>一時停止無視</span>
+          <span class="card-tag">標識</span>
+        </div>
+        <p class="card-body">「止まれ」標識や踏切で止まらずに進行。</p>
+        <p class="card-meta">見通しの悪い交差点での事故リスクが大きい違反です。[web:10]</p>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>通行区分違反</span>
+          <span class="card-tag">逆走など</span>
+        </div>
+        <p class="card-body">車道右側通行、歩道を高速走行するなど。</p>
+        <p class="card-meta">自転車は「車両」なので、基本は車道左側通行が原則です。[web:10][web:28]</p>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>無灯火・装備不良</span>
+          <span class="card-tag">夜間</span>
+        </div>
+        <p class="card-body">夜間のライト不点灯、ブレーキ不良など。</p>
+        <p class="card-meta">歩行者から見えにくく、追突・接触事故につながります。[web:10][web:25]</p>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>二人乗り・並走</span>
+          <span class="card-tag">基本ルール</span>
+        </div>
+        <p class="card-body">子ども用座席等を除く二人乗り、複数台で横並び走行。</p>
+        <p class="card-meta">車道幅を占有し、自動車からの追い越しが危険になります。[web:14][web:28]</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrapper">
+      <div class="diagram-title">イメージ図：青切符のイメージ</div>
+      <p class="note">
+        青切符は「比較的軽い違反」を対象に、反則金納付で刑事手続き（赤切符・前科）を避けつつ、
+        実効性のある責任追及を行う仕組みです。[web:7][web:17]
+      </p>
+    </div>
+  </section>
+
+  <!-- ページ: 追い越しルール -->
+  <section class="page" id="page-overtake">
+    <h2>自動車による追い越しルール</h2>
+    <p>
+      自動車が自転車の右側を通過・追い越すときは、
+      「自転車との距離」と「速度」をセットで安全側に取ることが求められます。[web:10][web:28]
+    </p>
+
+    <div class="diagram-wrapper">
+      <div class="diagram-title">
+        側方間隔と速度のイメージ
+      </div>
+
+      <div class="mode-switch" id="mode-switch">
+        <button class="mode-btn active" data-mode="safe">安全な追い越し</button>
+        <button class="mode-btn danger" data-mode="danger">危険な追い越し</button>
+      </div>
+
+      <div class="road" id="road">
+        <div class="lane-line"></div>
+        <div class="bike" id="bike">自転車</div>
+        <div class="car" id="car">自動車</div>
+        <div class="distance-arrow" id="arrow">
+          <span id="arrow-label">約1.5m以上あけるイメージ</span>
+        </div>
+      </div>
+
+      <p class="note" id="overtake-note">
+        安全モード：自転車との側方1.0〜1.5m以上を意識し、自転車の速度＋5〜10km/h程度まで減速して通過するイメージです。[web:20][web:23][web:26]
+      </p>
+    </div>
+
+    <ul>
+      <li>十分な間隔が取れない場合は、追い越さず減速して後ろで待つ。</li>
+      <li>自転車がふらついたり、路面状況で急に進路を変える可能性を前提に余裕を取る。</li>
+      <li>はみ出し禁止、一車線狭路などでは「追い越さない」選択を基本にする。</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+  // タブ切り替え
+  const tabs = document.querySelectorAll('.tab');
+  const pages = document.querySelectorAll('.page');
+
+  function showPage(pageId) {
+    pages.forEach(p => {
+      p.classList.toggle('active', p.id === 'page-' + pageId);
+    });
+    tabs.forEach(t => {
+      t.classList.toggle('active', t.dataset.page === pageId);
+    });
+    // ハッシュに状態を反映（簡易SPA風）
+    location.hash = pageId;
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => showPage(tab.dataset.page));
+  });
+
+  // 初回ロード時にハッシュからページ復元
+  window.addEventListener('load', () => {
+    const hash = location.hash.replace('#','');
+    if (hash) {
+      const exists = document.getElementById('page-' + hash);
+      if (exists) showPage(hash);
+    }
+  });
+
+  // 追い越しモード切替
+  const modeButtons = document.querySelectorAll('.mode-btn');
+  const arrowLabel = document.getElementById('arrow-label');
+  const overtakeNote = document.getElementById('overtake-note');
+  const car = document.getElementById('car');
+  const bike = document.getElementById('bike');
+  const arrow = document.getElementById('arrow');
+
+  modeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.dataset.mode;
+      modeButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (mode === 'safe') {
+        // 自転車・車の位置を離す
+        bike.style.left = '20px';
+        car.style.right = '20px';
+        arrow.style.left = '110px';
+        arrow.style.right = '110px';
+        arrowLabel.textContent = '約1.5m以上あけるイメージ';
+        overtakeNote.textContent =
+          '安全モード：側方1.0〜1.5m以上＋自転車の速度＋5〜10km/h程度まで減速して通過するイメージです。';
+      } else {
+        // 危険な近接状態を表現
+        bike.style.left = '20px';
+        car.style.right = '70px';
+        arrow.style.left = '90px';
+        arrow.style.right = '140px';
+        arrowLabel.textContent = '近すぎる・減速不足のイメージ';
+        overtakeNote.textContent =
+          '危険モード：側方間隔が狭く、速度も落とさない状態をイメージしています。実際には追い越しを控えるべき状況です。';
+      }
+    });
+  });
+</script>
+</body>
+</html>
