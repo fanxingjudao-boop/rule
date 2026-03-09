@@ -8,16 +8,19 @@
     :root {
       --primary: #1976d2;
       --accent: #43a047;
-      --bg: #f4f6f8;
+      --bg: #e3f2fd;           /* 明るい水色の背景 */
       --card-bg: #ffffff;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: #333;
     }
+
     .app-shell {
       max-width: 900px;
       margin: 0 auto;
@@ -74,9 +77,13 @@
     .page.active {
       display: block;
     }
+
     h2 {
       font-size: 1.2rem;
       margin-top: 0;
+    }
+    h3 {
+      font-size: 1rem;
     }
     .pill {
       display: inline-block;
@@ -144,6 +151,21 @@
       margin-top: 0.4rem;
     }
 
+    .diagram-wrapper .police-note {
+      margin-top: 0.4rem;
+      padding: 0.4rem 0.6rem;
+      background: #e8f5e9;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .diagram-wrapper .senior-note {
+      margin-top: 0.4rem;
+      padding: 0.4rem 0.6rem;
+      background: #fff3e0;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
     /* 追い越し図 */
     .road {
       position: relative;
@@ -188,7 +210,7 @@
     .distance-arrow {
       position: absolute;
       top: 45px;
-      left: 110px; 
+      left: 110px;
       right: 110px;
       height: 24px;
       display: flex;
@@ -234,6 +256,23 @@
       color: #c62828;
     }
 
+    /* 動画セクション */
+    .video-section h3 {
+      font-size: 1rem;
+      margin-top: 1.2rem;
+    }
+    .video-section h4 {
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+    }
+    .video-embed {
+      margin: 0.4rem 0 1rem;
+    }
+    .video-embed iframe {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
     /* 小さめ画面最適化 */
     @media (max-width: 600px) {
       .app-shell { padding: 0.7rem 0.5rem 2.5rem; }
@@ -246,8 +285,8 @@
 <body>
 <div class="app-shell">
   <header>
-    <h1>2026年 自転車ルール mini app<span class="pill">β</span></h1>
-    <p>青切符と、自動車による自転車の追い越しルールをコンパクトに確認できるページです。</p>
+    <h1>🚲 2026年 自転車ルール mini app<span class="pill">β</span></h1>
+    <p>青切符と、くるまからの追い越しルールを、子どもも大人も一緒に学べるページです。</p>
   </header>
 
   <!-- タブ -->
@@ -259,92 +298,125 @@
 
   <!-- ページ: ホーム -->
   <section class="page active" id="page-home">
-    <h2>概要</h2>
+    <h2>🏠 概要</h2>
     <p>
-      2026年4月1日から、自転車の交通違反にも「青切符」が導入され、
-      自動車による追い越し方法も厳格化されます。[web:7][web:10][web:17]
+      2026年4月1日から、自転車の交通違反にも「青切符」が導入されます。
+      また、くるまが自転車を追い越すときのルールも、より安全になるように変わります。[web:7][web:10][web:17]
     </p>
     <ul>
-      <li>16歳以上の自転車利用者が、一定の違反をすると反則金の対象。[web:7][web:17][web:25]</li>
-      <li>自動車は、自転車の横を通過するときに安全な側方間隔・速度を確保する義務。[web:10][web:28]</li>
+      <li>16歳以上の自転車利用者が、決められたルールを守らないと反則金の対象になります。[web:7][web:17][web:25]</li>
+      <li>くるまは、自転車の横を通るときに、<strong>じゅうぶんな距離</strong>と<strong>ゆっくりめのスピード</strong>をとることが必要になります。[web:10][web:28]</li>
     </ul>
-    <p>上のタブから、詳しい内容と図解を確認できます。</p>
+    <p>上のタブから、詳しい内容と図解をえらんでください。</p>
+
+    <div class="video-section">
+      <h3>🎬 動画で学ぼう 自転車のルール</h3>
+
+      <h4>子ども向け（小学生向け）</h4>
+      <p>アニメやイラストで、自転車の交通ルールをやさしく説明している動画です。</p>
+      <div class="video-embed">
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/qBXLeVVM-ec"
+          title="いっしょに学ぼう！自転車の交通ルール【小学生向け】"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+
+      <h4>高齢者向け</h4>
+      <p>高齢者の方が自転車に乗るときに、特に気をつけたいポイントをまとめた公式動画です。</p>
+      <div class="video-embed">
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/sS_q0hrfFZ8"
+          title="自転車の交通ルール【高齢者を主とした成人向け】"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- ページ: 青切符 -->
   <section class="page" id="page-blue">
-    <h2>自転車の青切符</h2>
+    <h2>🚲 自転車の青切符</h2>
     <p>
-      自転車にも自動車と同じ「交通反則通告制度（青切符）」が適用され、
-      比較的軽い違反は反則金で処理されます（前科は付かない）。[web:7][web:17]
+      自転車にも、自動車と同じ「交通反則通告制度（青切符）」が使われるようになります。
+      比較的軽い違反は、反則金をはらうことで刑事事件（赤切符）にはならない仕組みです。[web:7][web:17]
     </p>
 
     <div class="card-grid">
-      <div class="card">
+      <div class="card" style="border-left: 4px solid #fb8c00;">
         <div class="card-title">
           <span>ながらスマホ</span>
           <span class="card-tag">高リスク</span>
         </div>
-        <p class="card-body">スマホ操作や画面注視をしながらの走行。</p>
-        <p class="card-meta">例：警察庁・解説サイトでは高額帯の反則金例が紹介されています。</p>
+        <p class="card-body">スマホをさわりながら、画面を見ながら走る。</p>
+        <p class="card-meta">前を見ていないと、とつぜん止まった人や車に気づけません。[web:14][web:22]</p>
       </div>
-      <div class="card">
+      <div class="card" style="border-left: 4px solid #e53935;">
         <div class="card-title">
           <span>信号無視</span>
           <span class="card-tag">交差点</span>
         </div>
-        <p class="card-body">赤信号での進行など。</p>
-        <p class="card-meta">自動車同様、基本違反として厳しく扱われます。[web:10][web:14]</p>
+        <p class="card-body">赤信号でも止まらずに進んでしまう。</p>
+        <p class="card-meta">交差点の事故は、子どもでも大人でも命にかかわることがあります。[web:10][web:14]</p>
       </div>
-      <div class="card">
+      <div class="card" style="border-left: 4px solid #8e24aa;">
         <div class="card-title">
           <span>一時停止無視</span>
           <span class="card-tag">標識</span>
         </div>
-        <p class="card-body">「止まれ」標識や踏切で止まらずに進行。</p>
-        <p class="card-meta">見通しの悪い交差点での事故リスクが大きい違反です。[web:10]</p>
+        <p class="card-body">「止まれ」や踏切で止まらない。</p>
+        <p class="card-meta">見えないところから車が来るかもしれません。[web:10][web:52]</p>
       </div>
-      <div class="card">
+      <div class="card" style="border-left: 4px solid #3949ab;">
         <div class="card-title">
           <span>通行区分違反</span>
           <span class="card-tag">逆走など</span>
         </div>
-        <p class="card-body">車道右側通行、歩道を高速走行するなど。</p>
-        <p class="card-meta">自転車は「車両」なので、基本は車道左側通行が原則です。[web:10][web:28]</p>
+        <p class="card-body">車道の右側を走る、歩道を速いスピードで走る。</p>
+        <p class="card-meta">自転車は本来「車道の左側」を走る車両です。[web:10][web:28]</p>
       </div>
-      <div class="card">
+      <div class="card" style="border-left: 4px solid #00897b;">
         <div class="card-title">
           <span>無灯火・装備不良</span>
           <span class="card-tag">夜間</span>
         </div>
-        <p class="card-body">夜間のライト不点灯、ブレーキ不良など。</p>
-        <p class="card-meta">歩行者から見えにくく、追突・接触事故につながります。[web:10][web:25]</p>
+        <p class="card-body">夜のライトなし、ブレーキがききにくい自転車。</p>
+        <p class="card-meta">見えない・止まれないと、ぶつかる危険が大きくなります。[web:10][web:25]</p>
       </div>
-      <div class="card">
+      <div class="card" style="border-left: 4px solid #6d4c41;">
         <div class="card-title">
           <span>二人乗り・並走</span>
           <span class="card-tag">基本ルール</span>
         </div>
-        <p class="card-body">子ども用座席等を除く二人乗り、複数台で横並び走行。</p>
-        <p class="card-meta">車道幅を占有し、自動車からの追い越しが危険になります。[web:14][web:28]</p>
+        <p class="card-body">子ども用座席などをのぞき、二人乗りや横に並んで走る。</p>
+        <p class="card-meta">道を広くふさぎ、くるまからもよけにくくなります。[web:14][web:28]</p>
       </div>
     </div>
 
     <div class="diagram-wrapper">
-      <div class="diagram-title">イメージ図：青切符のイメージ</div>
-      <p class="note">
-        青切符は「比較的軽い違反」を対象に、反則金納付で刑事手続き（赤切符・前科）を避けつつ、
-        実効性のある責任追及を行う仕組みです。[web:7][web:17]
+      <div class="diagram-title">👮‍♂️ おまわりさんからのひとこと</div>
+      <p class="police-note">
+        「ながらスマホ」や「信号無視」は、<strong>自分だけでなく、歩いている人や
+        クルマの人にも大きなけがをさせてしまうかもしれない</strong>、とてもあぶない行為です。
+      </p>
+      <p class="police-note">
+        青切符は、おこられるためだけのものではありません。
+        「もう一度ルールを思い出して、次から事故を起こさないようにする」
+        ための約束ごとだと考えてください。[web:7][web:17]
       </p>
     </div>
   </section>
 
   <!-- ページ: 追い越しルール -->
   <section class="page" id="page-overtake">
-    <h2>自動車による追い越しルール</h2>
+    <h2>🚗💨 自動車による追い越しルール</h2>
     <p>
-      自動車が自転車の右側を通過・追い越すときは、
-      「自転車との距離」と「速度」をセットで安全側に取ることが求められます。[web:10][web:28]
+      くるまが自転車の右側を通るときは、
+      自転車との「きょり」と「スピード」をセットで安全にすることが大切です。[web:10][web:28]
     </p>
 
     <div class="diagram-wrapper">
@@ -354,7 +426,7 @@
 
       <div class="mode-switch" id="mode-switch">
         <button class="mode-btn active" data-mode="safe">安全な追い越し</button>
-        <button class="mode-btn danger" data-mode="danger">危険な追い越し</button>
+        <button class="mode-btn danger" data-mode="danger">危ない追い越し</button>
       </div>
 
       <div class="road" id="road">
@@ -367,14 +439,28 @@
       </div>
 
       <p class="note" id="overtake-note">
-        安全モード：自転車との側方1.0〜1.5m以上を意識し、自転車の速度＋5〜10km/h程度まで減速して通過するイメージです。[web:20][web:23][web:26]
+        安全モード：自転車との側方1.0〜1.5m以上を意識し、自転車のスピード＋5〜10km/h
+        くらいまで減速して通過するイメージです。[web:20][web:23][web:26]
+      </p>
+    </div>
+
+    <div class="diagram-wrapper">
+      <div class="diagram-title">🚶‍♂️ 高齢者が乗る自転車のイメージ</div>
+      <p class="senior-note">
+        高齢になると、とっさに止まったりハンドルを大きく動かすのが
+        むずかしくなることがあります。そのぶん<strong>多めの距離</strong>と
+        <strong>ゆっくりめのスピード</strong>をとることが大切です。[web:39][web:44][web:53][web:56]
+      </p>
+      <p class="senior-note">
+        本人やご家族は、ヘルメットの着用、ブレーキやライトの点検、
+        夜間は無理をしないなど、「ころばない」「ぶつからない」準備を心がけましょう。[web:39][web:53][web:56]
       </p>
     </div>
 
     <ul>
-      <li>十分な間隔が取れない場合は、追い越さず減速して後ろで待つ。</li>
-      <li>自転車がふらついたり、路面状況で急に進路を変える可能性を前提に余裕を取る。</li>
-      <li>はみ出し禁止、一車線狭路などでは「追い越さない」選択を基本にする。</li>
+      <li>きょりがとれない場所（せまい道など）では、追い越さずにうしろで待つ。</li>
+      <li>自転車はふらつくことがある前提で、あせらずに近づきすぎない。</li>
+      <li>はみ出し禁止の区間は、「がまんして追い越さない」選択が安全です。</li>
     </ul>
   </section>
 </div>
@@ -391,7 +477,6 @@
     tabs.forEach(t => {
       t.classList.toggle('active', t.dataset.page === pageId);
     });
-    // ハッシュに状態を反映（簡易SPA風）
     location.hash = pageId;
   }
 
@@ -399,7 +484,6 @@
     tab.addEventListener('click', () => showPage(tab.dataset.page));
   });
 
-  // 初回ロード時にハッシュからページ復元
   window.addEventListener('load', () => {
     const hash = location.hash.replace('#','');
     if (hash) {
@@ -423,23 +507,21 @@
       btn.classList.add('active');
 
       if (mode === 'safe') {
-        // 自転車・車の位置を離す
         bike.style.left = '20px';
         car.style.right = '20px';
         arrow.style.left = '110px';
         arrow.style.right = '110px';
         arrowLabel.textContent = '約1.5m以上あけるイメージ';
         overtakeNote.textContent =
-          '安全モード：側方1.0〜1.5m以上＋自転車の速度＋5〜10km/h程度まで減速して通過するイメージです。';
+          '安全モード：自転車との側方1.0〜1.5m以上＋自転車のスピード＋5〜10km/hくらいまで減速して通過するイメージです。';
       } else {
-        // 危険な近接状態を表現
         bike.style.left = '20px';
         car.style.right = '70px';
         arrow.style.left = '90px';
         arrow.style.right = '140px';
         arrowLabel.textContent = '近すぎる・減速不足のイメージ';
         overtakeNote.textContent =
-          '危険モード：側方間隔が狭く、速度も落とさない状態をイメージしています。実際には追い越しを控えるべき状況です。';
+          '危ないモード：側方間隔がせまく、スピードもあまり落としていない状態のイメージです。実際には、追い越しをひかえるべき場面です。';
       }
     });
   });
