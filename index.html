@@ -8,7 +8,7 @@
     :root {
       --primary: #1976d2;
       --accent: #43a047;
-      --bg: #e3f2fd;           /* 明るい水色の背景 */
+      --bg: #e3f2fd;
       --card-bg: #ffffff;
     }
 
@@ -19,6 +19,7 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: #333;
+      font-size: 16px; /* ベース文字サイズを大きめに */
     }
 
     .app-shell {
@@ -30,33 +31,35 @@
       padding: 0.5rem 0 1rem;
     }
     header h1 {
-      font-size: 1.4rem;
-      margin: 0 0 0.3rem;
+      font-size: 1.6rem;
+      margin: 0 0 0.4rem;
     }
     header p {
       margin: 0;
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #555;
     }
 
     /* タブ */
     .tabs {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
       margin: 1rem 0;
       border-bottom: 1px solid #ddd;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .tab {
-      padding: 0.4rem 0.8rem;
+      padding: 0.5rem 0.9rem;
       border-radius: 999px 999px 0 0;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       white-space: nowrap;
       border: 1px solid transparent;
       border-bottom: none;
       background: transparent;
       color: #555;
+      flex-shrink: 0;
     }
     .tab.active {
       background: #fff;
@@ -72,27 +75,33 @@
       border-radius: 0 0 12px 12px;
       padding: 1rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-      min-height: 300px;
+      min-height: 260px;
     }
     .page.active {
       display: block;
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-top: 0;
     }
     h3 {
-      font-size: 1rem;
+      font-size: 1.05rem;
+      margin-top: 0.8rem;
     }
     .pill {
       display: inline-block;
-      padding: 0.1rem 0.4rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       background: #e3f2fd;
-      color: --primary;
+      color: var(--primary);
       margin-left: 0.4rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      font-size: 0.98rem;
     }
 
     /* カードレイアウト（青切符） */
@@ -107,7 +116,7 @@
       border-radius: 8px;
       border: 1px solid #e0e0e0;
       padding: 0.7rem 0.9rem;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
     }
     .card-title {
       font-weight: 600;
@@ -115,10 +124,11 @@
       display: flex;
       justify-content: space-between;
       gap: 0.5rem;
+      font-size: 0.98rem;
     }
     .card-tag {
-      font-size: 0.7rem;
-      padding: 0.1rem 0.4rem;
+      font-size: 0.8rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 999px;
       background: #f3e5f5;
       color: #6a1b9a;
@@ -128,7 +138,7 @@
       margin: 0.1rem 0 0.25rem;
     }
     .card-meta {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: #666;
     }
 
@@ -141,12 +151,12 @@
       background: #fafafa;
     }
     .diagram-title {
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
     }
     .note {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: #555;
       margin-top: 0.4rem;
     }
@@ -156,14 +166,14 @@
       padding: 0.4rem 0.6rem;
       background: #e8f5e9;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
     .diagram-wrapper .senior-note {
       margin-top: 0.4rem;
       padding: 0.4rem 0.6rem;
       background: #fff3e0;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
 
     /* 追い越し図 */
@@ -194,7 +204,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #fff;
     }
     .car {
@@ -240,8 +250,8 @@
       margin-top: 0.3rem;
     }
     .mode-btn {
-      padding: 0.25rem 0.7rem;
-      font-size: 0.8rem;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.9rem;
       border: none;
       background: transparent;
       cursor: pointer;
@@ -258,7 +268,7 @@
 
     /* 動画セクション */
     .video-section h3 {
-      font-size: 1rem;
+      font-size: 1.05rem;
       margin-top: 1.2rem;
     }
     .video-section h4 {
@@ -283,16 +293,17 @@
       border-radius: 8px;
       background: #e8f5e9;
       border: 1px solid #c8e6c9;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
     }
     .quiz-buttons {
       margin-top: 0.4rem;
       display: flex;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
     .quiz-btn {
-      padding: 0.3rem 0.9rem;
-      font-size: 0.9rem;
+      padding: 0.35rem 1.1rem;
+      font-size: 0.95rem;
       border-radius: 999px;
       border: none;
       cursor: pointer;
@@ -304,7 +315,7 @@
     }
     .quiz-feedback {
       margin-top: 0.4rem;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
     .quiz-feedback.correct {
       color: #2e7d32;
@@ -318,23 +329,31 @@
       border-radius: 8px;
       background: #fffde7;
       border: 1px solid #fff59d;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     /* 小さめ画面最適化 */
     @media (max-width: 600px) {
-      .app-shell { padding: 0.7rem 0.5rem 2.5rem; }
-      header h1 { font-size: 1.1rem; }
+      body { font-size: 15px; }
+      .app-shell { padding: 0.7rem 0.5rem 2.2rem; }
+      header h1 { font-size: 1.3rem; }
+      .tabs { gap: 0.3rem; }
+      .tab { font-size: 0.9rem; padding: 0.45rem 0.7rem; }
+      .page { padding: 0.8rem 0.7rem 1rem; border-radius: 0 0 10px 10px; }
       .road { height: 130px; }
-      .distance-arrow { left: 96px; right: 96px; font-size: 0.75rem; }
+      .distance-arrow { left: 80px; right: 80px; font-size: 0.75rem; }
     }
   </style>
 </head>
 <body>
 <div class="app-shell">
   <header>
-    <h1>🚲 2026年 自転車ルール mini app<span class="pill">β</span></h1>
-    <p>青切符と、くるまからの追い越しルールを、子どもも大人も一緒に学べるページです。</p>
+    <h1>🚲 2026年 自転車<ruby>ルール<rt>るーる</rt></ruby> mini app<span class="pill">β</span></h1>
+    <p>
+      <ruby>青切符<rt>あおきっぷ</rt></ruby>と、くるまからの
+      <ruby>追<rt>お</rt></ruby>い<ruby>越<rt>こ</rt></ruby>しルールを、
+      子どもも大人もいっしょに学べるページです。
+    </p>
   </header>
 
   <!-- タブ -->
@@ -347,16 +366,21 @@
 
   <!-- ページ: ホーム -->
   <section class="page active" id="page-home">
-    <h2>🏠 概要</h2>
+    <h2>🏠 <ruby>概要<rt>がいよう</rt></ruby></h2>
     <p>
-      2026年4月1日から、自転車の交通違反にも「青切符」が導入されます。
-      また、くるまが自転車を追い越すときのルールも、より安全になるように変わります。[web:7][web:10][web:17]
+      2026年4月1日から、自転車の交通<ruby>違反<rt>いはん</rt></ruby>にも
+      「<ruby>青切符<rt>あおきっぷ</rt></ruby>」が<ruby>導入<rt>どうにゅう</rt></ruby>されます。
+      また、くるまが自転車を<ruby>追<rt>お</rt></ruby>い<ruby>越<rt>こ</rt></ruby>すときのルールも、
+      より安全になるように変わります。
     </p>
     <ul>
-      <li>16歳以上の自転車利用者が、決められたルールを守らないと反則金の対象になります。[web:7][web:17][web:25]</li>
-      <li>くるまは、自転車の横を通るときに、<strong>じゅうぶんな距離</strong>と<strong>ゆっくりめのスピード</strong>をとることが必要になります。[web:10][web:28]</li>
+      <li>16さい以上の自転車利用者が、<ruby>決<rt>き</rt></ruby>められたルールを守らないと
+        <ruby>反則金<rt>はんそくきん</rt></ruby>の対象になります。</li>
+      <li>くるまは、自転車のよこを通るときに、
+        <strong>じゅうぶんな<ruby>距離<rt>きょり</rt></ruby></strong>と
+        <strong>ゆっくりめのスピード</strong>をとることが必要になります。</li>
     </ul>
-    <p>上のタブから、詳しい内容と図解、クイズをえらんでください。</p>
+    <p>上のタブから、くわしい<ruby>内容<rt>ないよう</rt></ruby>と図解、クイズをえらんでください。</p>
 
     <div class="video-section">
       <h3>🎬 動画で学ぼう 自転車のルール</h3>
@@ -389,10 +413,12 @@
 
   <!-- ページ: 青切符 -->
   <section class="page" id="page-blue">
-    <h2>🚲 自転車の青切符</h2>
+    <h2>🚲 自転車の<ruby>青切符<rt>あおきっぷ</rt></ruby></h2>
     <p>
-      自転車にも、自動車と同じ「交通反則通告制度（青切符）」が使われるようになります。
-      比較的軽い違反は、反則金をはらうことで刑事事件（赤切符）にはならない仕組みです。[web:7][web:17]
+      自転車にも、自動車と同じ
+      「交通<ruby>反則<rt>はんそく</rt></ruby><ruby>通告<rt>つうこく</rt></ruby>制度（青切符）」が
+      使われるようになります。軽めの違反は、反則金をはらうことで
+      <ruby>刑事<rt>けいじ</rt></ruby><ruby>事件<rt>じけん</rt></ruby>（赤切符）にはならない仕組みです。
     </p>
 
     <div class="card-grid">
@@ -401,76 +427,81 @@
           <span>ながらスマホ</span>
           <span class="card-tag">高リスク</span>
         </div>
-        <p class="card-body">スマホをさわりながら、画面を見ながら走る。</p>
-        <p class="card-meta">前を見ていないと、とつぜん止まった人や車に気づけません。[web:14][web:22]</p>
+        <p class="card-body">
+          スマホをさわりながら、画面を見ながら走る。
+        </p>
+        <p class="card-meta">
+          前を見ていないと、とつぜん止まった人や車に気づけません。
+        </p>
       </div>
       <div class="card" style="border-left: 4px solid #e53935;">
         <div class="card-title">
-          <span>信号無視</span>
+          <span><ruby>信号<rt>しんごう</rt></ruby><ruby>無視<rt>むし</rt></ruby></span>
           <span class="card-tag">交差点</span>
         </div>
         <p class="card-body">赤信号でも止まらずに進んでしまう。</p>
-        <p class="card-meta">交差点の事故は、子どもでも大人でも命にかかわることがあります。[web:10][web:14]</p>
+        <p class="card-meta">交差点の事故は、子どもでも大人でも命にかかわることがあります。</p>
       </div>
       <div class="card" style="border-left: 4px solid #8e24aa;">
         <div class="card-title">
-          <span>一時停止無視</span>
+          <span><ruby>一時停止<rt>いちじていし</rt></ruby>むし</span>
           <span class="card-tag">標識</span>
         </div>
         <p class="card-body">「止まれ」や踏切で止まらない。</p>
-        <p class="card-meta">見えないところから車が来るかもしれません。[web:10][web:52]</p>
+        <p class="card-meta">見えないところから車が来るかもしれません。</p>
       </div>
-      <div class="card" style="border-left: 4px solid #3949ab%;">
+      <div class="card" style="border-left: 4px solid #3949ab;">
         <div class="card-title">
-          <span>通行区分違反</span>
+          <span><ruby>通行区分<rt>つうこうくぶん</rt></ruby>違反</span>
           <span class="card-tag">逆走など</span>
         </div>
         <p class="card-body">車道の右側を走る、歩道を速いスピードで走る。</p>
-        <p class="card-meta">自転車は本来「車道の左側」を走る車両です。[web:10][web:28]</p>
+        <p class="card-meta">自転車は本来「車道の左側」を走る車両です。</p>
       </div>
       <div class="card" style="border-left: 4px solid #00897b;">
         <div class="card-title">
-          <span>無灯火・装備不良</span>
+          <span><ruby>無灯火<rt>むとうか</rt></ruby>・<ruby>装備不良<rt>そうびふりょう</rt></ruby></span>
           <span class="card-tag">夜間</span>
         </div>
         <p class="card-body">夜のライトなし、ブレーキがききにくい自転車。</p>
-        <p class="card-meta">見えない・止まれないと、ぶつかる危険が大きくなります。[web:10][web:25]</p>
+        <p class="card-meta">見えない・止まれないと、ぶつかる危険が大きくなります。</p>
       </div>
       <div class="card" style="border-left: 4px solid #6d4c41;">
         <div class="card-title">
-          <span>二人乗り・並走</span>
+          <span>二人乗り・<ruby>並走<rt>へいそう</rt></ruby></span>
           <span class="card-tag">基本ルール</span>
         </div>
         <p class="card-body">子ども用座席などをのぞき、二人乗りや横に並んで走る。</p>
-        <p class="card-meta">道を広くふさぎ、くるまからもよけにくくなります。[web:14][web:28]</p>
+        <p class="card-meta">道を広くふさぎ、くるまからもよけにくくなります。</p>
       </div>
     </div>
 
     <div class="diagram-wrapper">
       <div class="diagram-title">👮‍♂️ おまわりさんからのひとこと</div>
       <p class="police-note">
-        「ながらスマホ」や「信号無視」は、<strong>自分だけでなく、歩いている人や
-        クルマの人にも大きなけがをさせてしまうかもしれない</strong>、とてもあぶない行為です。
+        「ながらスマホ」や「信号むし」は、
+        <strong>自分だけでなく、歩いている人や、クルマの人にも大きなけがをさせてしまうかもしれない</strong>、
+        とてもあぶない行為です。
       </p>
       <p class="police-note">
         青切符は、おこられるためだけのものではありません。
         「もう一度ルールを思い出して、次から事故を起こさないようにする」
-        ための約束ごとだと考えてください。[web:7][web:17]
+        ための約束ごとだと考えてください。
       </p>
     </div>
   </section>
 
   <!-- ページ: 追い越しルール -->
   <section class="page" id="page-overtake">
-    <h2>🚗💨 自動車による追い越しルール</h2>
+    <h2>🚗💨 自動車による<ruby>追<rt>お</rt></ruby>い<ruby>越<rt>こ</rt></ruby>しルール</h2>
     <p>
       くるまが自転車の右側を通るときは、
-      自転車との「きょり」と「スピード」をセットで安全にすることが大切です。[web:10][web:28]
+      自転車との「きょり」と「スピード」をセットで安全にすることが大切です。
     </p>
 
     <div class="diagram-wrapper">
       <div class="diagram-title">
-        側方間隔と速度のイメージ
+        側方<ruby>間隔<rt>かんかく</rt></ruby>と速度のイメージ
       </div>
 
       <div class="mode-switch" id="mode-switch">
@@ -488,8 +519,8 @@
       </div>
 
       <p class="note" id="overtake-note">
-        安全モード：自転車との側方1.0〜1.5m以上を意識し、自転車のスピード＋5〜10km/h
-        くらいまで減速して通過するイメージです。[web:20][web:23][web:26]
+        安全モード：自転車との側方1.0〜1.5m以上を意識し、
+        自転車のスピードより少しだけ速いスピードまで減速して通過するイメージです。
       </p>
     </div>
 
@@ -497,12 +528,12 @@
       <div class="diagram-title">🚶‍♂️ 高齢者が乗る自転車のイメージ</div>
       <p class="senior-note">
         高齢になると、とっさに止まったりハンドルを大きく動かすのが
-        むずかしくなることがあります。そのぶん<strong>多めの距離</strong>と
-        <strong>ゆっくりめのスピード</strong>をとることが大切です。[web:39][web:44][web:53][web:56]
+        むずかしくなることがあります。そのぶん<strong>多めの<ruby>距離<rt>きょり</rt></ruby></strong>と
+        <strong>ゆっくりめのスピード</strong>をとることが大切です。
       </p>
       <p class="senior-note">
         本人やご家族は、ヘルメットの着用、ブレーキやライトの点検、
-        夜間は無理をしないなど、「ころばない」「ぶつからない」準備を心がけましょう。[web:39][web:53][web:56]
+        夜間は無理をしないなど、「ころばない」「ぶつからない」準備を心がけましょう。
       </p>
     </div>
 
@@ -578,7 +609,7 @@
         arrow.style.right = '110px';
         arrowLabel.textContent = '約1.5m以上あけるイメージ';
         overtakeNote.textContent =
-          '安全モード：自転車との側方1.0〜1.5m以上＋自転車のスピード＋5〜10km/hくらいまで減速して通過するイメージです。';
+          '安全モード：自転車との側方1.0〜1.5m以上＋自転車のスピードより少しだけ速いスピードまで減速して通過するイメージです。';
       } else {
         bike.style.left = '20px';
         car.style.right = '70px';
@@ -586,30 +617,30 @@
         arrow.style.right = '140px';
         arrowLabel.textContent = '近すぎる・減速不足のイメージ';
         overtakeNote.textContent =
-          '危ないモード：側方間隔がせまく、スピードもあまり落としていない状態のイメージです。実際には、追い越しをひかえるべき場面です。';
+          '危ないモード：側方のきょりがせまく、スピードもあまり落としていない状態のイメージです。実際には、追い越しをひかえるべき場面です。';
       }
     });
   });
 
-  // クイズデータ
+  // クイズデータ（○×）
   const quizData = [
     {
       id: 1,
       text: 'Q1. 自転車は「車のなかま」なので、基本は車道の左側を走る。',
       answer: true,
-      explain: '自転車は軽車両なので、車道の左側通行が原則です。歩道は特別なときだけです。[web:52][web:70]'
+      explain: '自転車は軽車両なので、車道の左側通行がげんそくです。歩道は特別なときだけです。'
     },
     {
       id: 2,
       text: 'Q2. 歩道に人がいなければ、スマホを見ながら速く走ってもいい。',
       answer: false,
-      explain: '「ながらスマホ」は、歩道でも車道でもとても危ない違反です。[web:14][web:66]'
+      explain: '「ながらスマホ」は、歩道でも車道でもとても危ない違反です。'
     },
     {
       id: 3,
       text: 'Q3. くるまが自転車を追い越すときは、自転車のすぐよこをそのままのスピードで通ってよい。',
       answer: false,
-      explain: 'じゅうぶんなきょりをあけて、スピードも落とす必要があります。[web:20][web:23]'
+      explain: 'じゅうぶんなきょりをあけて、スピードも落とすひつようがあります。'
     }
   ];
 
